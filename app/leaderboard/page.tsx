@@ -1,41 +1,31 @@
-import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import Leaderboard from "../components/Leaderboard";
 import { getLeaderboardData } from "../lib/serverUtils";
+import Navbar from "../components/Navbar";
 
 export default async function LeaderboardPage() {
-  const { userId } = await auth();
   const leaderboardData = await getLeaderboardData();
   
   return (
-    <div className="min-h-screen bg-background">
-      <header className="bg-surface shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center space-x-8">
-            <Link href="/">
-              <h1 className="text-2xl font-bold text-primary">Fap Tracker</h1>
-            </Link>
-            <nav className="hidden md:flex space-x-6">
-              <Link href="/dashboard" className="text-text-secondary hover:text-primary transition-colors">
-                Dashboard
-              </Link>
-              <Link href="/leaderboard" className="text-primary font-medium">
-                Leaderboard
-              </Link>
-            </nav>
-          </div>
-          {userId && <UserButton afterSignOutUrl="/" />}
-        </div>
-      </header>
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="min-h-screen text-white">
+      <Navbar />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8 text-center">
             <h2 className="text-3xl font-bold text-text-primary mb-2">Community Leaderboard</h2>
             <p className="text-text-secondary">See who's been tracking the most in the community</p>
           </div>
           
+          
+          <div className="mx-auto max-w-2xl">
+            <Leaderboard 
+              daily={leaderboardData.daily}
+              weekly={leaderboardData.weekly}
+              monthly={leaderboardData.monthly}
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="bg-surface rounded-lg shadow-sm p-6">
               <h3 className="text-xl font-semibold text-primary mb-4">About the Leaderboard</h3>
@@ -68,14 +58,6 @@ export default async function LeaderboardPage() {
             </div>
           </div>
           
-          <div className="mx-auto max-w-2xl">
-            <Leaderboard 
-              daily={leaderboardData.daily}
-              weekly={leaderboardData.weekly}
-              monthly={leaderboardData.monthly}
-            />
-          </div>
-          
           <div className="mt-12 text-center">
             <Link 
               href="/dashboard" 
@@ -88,15 +70,7 @@ export default async function LeaderboardPage() {
             </Link>
           </div>
         </div>
-      </main>
-      
-      <footer className="bg-surface py-6 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-text-secondary text-sm">
-            &copy; {new Date().getFullYear()} Fap Tracker. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </div>
+      </div>
+    </main>
   );
 } 

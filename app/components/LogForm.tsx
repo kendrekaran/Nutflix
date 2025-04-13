@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Send, Calendar, Clock } from "lucide-react";
 
 interface LogFormProps {
   userId: string;
@@ -46,69 +47,74 @@ export default function LogForm({ userId }: LogFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      {error && (
-        <div className="p-3 bg-danger/20 text-danger rounded-md">
-          {error}
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {error && (
+          <div className="p-4 bg-destructive/10 border border-destructive/20 text-destructive rounded-lg text-sm font-medium animate-pulse">
+            {error}
+          </div>
+        )}
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="space-y-2">
+            <label htmlFor="date" className="flex items-center gap-2 text-sm font-medium text-foreground">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              Date
+            </label>
+            <input
+              type="date"
+              id="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              className="w-full px-4 py-3 border border-zinc-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-destructive/50 focus:border-destructive bg-zinc-800/50 text-foreground transition"
+              max={new Date().toISOString().split("T")[0]}
+              required
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <label htmlFor="time" className="flex items-center gap-2 text-sm font-medium text-foreground">
+              <Clock className="h-4 w-4 text-muted-foreground" />
+              Time
+            </label>
+            <input
+              type="time"
+              id="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              className="w-full px-4 py-3 border border-zinc-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-destructive/50 focus:border-destructive bg-zinc-800/50 text-foreground transition"
+              required
+            />
+          </div>
         </div>
-      )}
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="date" className="block text-sm font-medium text-text-primary mb-1">
-            Date
+        
+        <div className="space-y-2">
+          <label htmlFor="note" className="flex items-center gap-2 text-sm font-medium text-foreground">
+            <Send className="h-4 w-4 text-muted-foreground" />
+            Note (optional)
           </label>
-          <input
-            type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-800 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-background text-text-primary"
-            max={new Date().toISOString().split("T")[0]}
-            required
+          <textarea
+            id="note"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            className="w-full px-4 py-3 border border-zinc-700 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-destructive/50 focus:border-destructive bg-zinc-800/50 text-foreground transition"
+            rows={3}
+            placeholder="What triggered the relapse? What could you do differently next time?"
           />
         </div>
         
-        <div>
-          <label htmlFor="time" className="block text-sm font-medium text-text-primary mb-1">
-            Time
-          </label>
-          <input
-            type="time"
-            id="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-800 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-background text-text-primary"
-            required
-          />
-        </div>
-      </div>
-      
-      <div>
-        <label htmlFor="note" className="block text-sm font-medium text-text-primary mb-1">
-          Note (optional)
-        </label>
-        <textarea
-          id="note"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          className="w-full px-3 py-2 border border-slate-800 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary bg-background text-text-primary"
-          rows={3}
-          placeholder="What triggered the relapse? What could you do differently next time?"
-        />
-      </div>
-      
-      <button
-        type="submit"
-        disabled={isLoading}
-        className="w-full bg-danger hover:bg-opacity-90 text-text-primary font-medium py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-danger transition disabled:opacity-50"
-      >
-        {isLoading ? "Logging..." : "Log Relapse"}
-      </button>
-      
-      <p className="text-sm text-text-secondary mt-2">
-        You can log multiple relapses per day. Each log will track the specific time.
-      </p>
-    </form>
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70 text-destructive-foreground font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-destructive/50 transition disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+        >
+          {isLoading ? "Logging..." : "Log Relapse"}
+        </button>
+        
+        <p className="text-sm text-muted-foreground mt-3 italic">
+          You can log multiple relapses per day. Each log will track the specific time.
+        </p>
+      </form>
+    </div>
   );
 } 

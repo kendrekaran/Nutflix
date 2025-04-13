@@ -2,21 +2,30 @@ import { type Metadata } from 'next'
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Inter, Poppins, Sora } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const poppins = Poppins({
   subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+})
+
+const sora = Sora({
+  subsets: ['latin'],
+  variable: '--font-sora',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'FapTracker - Break Free, Rebuild, Thrive',
+  title: 'NutFlix - Break Free, Rebuild, Thrive',
   description: 'Track your journey to overcome addiction, build healthier habits, and regain control of your life.',
 }
 
@@ -28,7 +37,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-text-primary`}>
+        <body className={`${inter.variable} ${poppins.variable} ${sora.variable} antialiased font-sans bg-background text-text-primary`}>
           {children}
         </body>
       </html>
