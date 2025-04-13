@@ -40,6 +40,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={`${inter.variable} ${poppins.variable} ${sora.variable}`}>
+      <head>
+        <link rel="icon" href="favicon.ico" />
+      </head>
         <body className={`font-sans ${inter.variable} ${poppins.variable} ${sora.variable}`}>
           <LenisProvider>
             <ScrollAnimationInitializer>
