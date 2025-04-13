@@ -4,12 +4,15 @@ import {
 } from '@clerk/nextjs'
 import { Inter, Poppins, Sora } from 'next/font/google'
 import './globals.css'
+import LenisProvider from './components/LenisProvider'
+import ScrollToTopButton from './components/ScrollToTopButton'
+import ScrollAnimationInitializer from './components/ScrollAnimationInitializer'
 
 const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-inter',
   display: 'swap',
-})
+  variable: '--font-inter', // optional: enables Tailwind integration
+});
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -36,9 +39,14 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body className={`${inter.variable} ${poppins.variable} ${sora.variable} antialiased font-sans bg-background text-text-primary`}>
-          {children}
+      <html lang="en" className={`${inter.variable} ${poppins.variable} ${sora.variable}`}>
+        <body className={`font-sans ${inter.variable} ${poppins.variable} ${sora.variable}`}>
+          <LenisProvider>
+            <ScrollAnimationInitializer>
+              {children}
+            </ScrollAnimationInitializer>
+            <ScrollToTopButton />
+          </LenisProvider>
         </body>
       </html>
     </ClerkProvider>

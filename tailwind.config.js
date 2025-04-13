@@ -32,12 +32,26 @@ module.exports = {
         green: {
           400: '#00FFAB',
         },
+        "color-1": "#E63946",
+        "color-2": "#E63946",
+        "color-3": "#E63946",
+        "color-4": "#E63946",
+        "color-5": "#E63946",
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'var(--font-poppins)', 'var(--font-sora)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
         inter: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         poppins: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
         sora: ['var(--font-sora)', 'system-ui', 'sans-serif'],
+      },
+      animation: {
+        rainbow: "rainbow var(--speed, 2s) infinite linear",
+      },
+      keyframes: {
+        rainbow: {
+          "0%": { "background-position": "0%" },
+          "100%": { "background-position": "200%" },
+        },
       },
     },
   },
