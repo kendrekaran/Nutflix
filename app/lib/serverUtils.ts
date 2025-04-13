@@ -208,6 +208,9 @@ export async function getLeaderboardData() {
     const monthlyLogsByUser = new Map();
     
     logsThisMonth.forEach(log => {
+      // Skip logs with no user data
+      if (!log.user) return;
+      
       const userId = log.user.id;
       const userName = log.user.name || 'Anonymous';
       const logDate = new Date(log.date);
@@ -255,6 +258,11 @@ export async function getLeaderboardData() {
     };
   } catch (error) {
     console.error('Error getting leaderboard data:', error);
-    throw error;
+    // Return empty arrays instead of throwing an error
+    return {
+      daily: [],
+      weekly: [],
+      monthly: []
+    };
   }
 } 

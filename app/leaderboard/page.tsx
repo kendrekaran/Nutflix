@@ -5,7 +5,18 @@ import { getLeaderboardData } from "../lib/serverUtils";
 import Navbar from "../components/Navbar";
 
 export default async function LeaderboardPage() {
-  const leaderboardData = await getLeaderboardData();
+  let leaderboardData;
+  
+  try {
+    leaderboardData = await getLeaderboardData();
+  } catch (error) {
+    console.error("Error fetching leaderboard data:", error);
+    leaderboardData = {
+      daily: [],
+      weekly: [],
+      monthly: []
+    };
+  }
   
   return (
     <main className="min-h-screen text-white">
@@ -20,9 +31,9 @@ export default async function LeaderboardPage() {
           
           <div className="mx-auto max-w-2xl">
             <Leaderboard 
-              daily={leaderboardData.daily}
-              weekly={leaderboardData.weekly}
-              monthly={leaderboardData.monthly}
+              daily={leaderboardData?.daily || []}
+              weekly={leaderboardData?.weekly || []}
+              monthly={leaderboardData?.monthly || []}
             />
           </div>
 
