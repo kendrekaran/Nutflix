@@ -53,7 +53,7 @@ export default function HeroSection() {
           >
             <span className="block text-text-primary">Stay Strong, Stay Consistent</span>
             <span className="bg-gradient-to-r from-primary to-danger text-transparent bg-clip-text">
-              Track Your Fapping Progress & Achieve Your Goals!
+              Track Your Fapping Progress & Reach Your Pleasure Goals!
             </span>
           </motion.h1>
 
