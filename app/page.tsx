@@ -4,7 +4,7 @@ import ContentSections from "./components/content-sections"
 
 export default function Home() {
   return (
-    <main className="min-h-screen text-text-primary bg-gradient-to-b from-background to-surface">
+    <main className="min-h-screen text-text-primary overflow-x-hidden bg-gradient-to-b from-background to-surface">
       <Navbar />
       <HeroSection />
       <ContentSections />
