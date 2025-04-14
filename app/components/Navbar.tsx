@@ -27,12 +27,6 @@ export default function Navbar() {
         label: "Log Relapse",
         isAnchor: false
     },
-
-    { 
-      href: isHomePage ? "/leaderboard" : "/leaderboard", 
-      label: "Leaderboard",
-      isAnchor: isHomePage
-    },
     { 
       href: "/dashboard", 
       label: "Dashboard",

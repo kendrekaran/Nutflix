@@ -32,9 +32,9 @@ export default function HeroSection() {
         transition={{ duration: 0.5 }}
         className="container mx-auto px-4 pb-4 flex justify-center"
       >
-        <Link href="leaderboard">
+        <Link href="dashboard">
           <Button className="rounded-full px-5 py-1 text-xs bg-destructive/30 hover:bg-destructive/40 text-text-primary shadow-lg transition duration-300">
-            View Leaderboard
+            View Dashboard
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
         </Link>
